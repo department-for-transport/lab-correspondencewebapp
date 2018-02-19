@@ -1,0 +1,79 @@
+from flask import Flask, jsonify, render_template, request, url_for
+from flask_jsglue import JSGlue
+from google.cloud import storage
+import ocr
+import SGDpredict
+import allocator
+
+
+
+
+def list_images(bucket_name):
+    """Lists all the images in the bucket."""
+    storage_client = storage.Client()
+    bucket = storage_client.get_bucket(bucket_name)
+
+    blobs = bucket.list_blobs()
+    image_list = []
+    for blob in blobs:
+        image_list.append(blob.name)
+    return image_list
+
+#get list of images from bucket
+image_list = list_images('chapterimages')
+
+#Load SGDmodel
+sgdmodel = SGDpredict.SGDModel()
+sgdmodel.load('/home/zach/chapter/web/model/sk_SGD_model.pickle')
+
+#load NeuralNet
+
+neuralnet = allocator.NeuralNet('model/model.tflearn', 'model/words.pickle', 'model/categories.pickle')
+neuralnet.load_model()
+
+
+
+app = Flask(__name__)
+JSGlue(app)
+
+if app.config["DEBUG"]:
+    @app.after_request
+    def after_request(response):
+        response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        response.headers["Expires"] = 0
+        response.headers["Pragma"] = "no-cache"
+        return response
+
+
+@app.route("/")
+def index():
+    return render_template('index.html')
+
+
+@app.route("/parliamentaryquestions")
+def parliamentaryquestions():
+
+    return render_template('parliamentaryquestions.html')
+
+@app.route("/getunit")
+def getunit():
+    if request.args.get("question"):
+        question = request.args.get("question")
+        prediction1 = sgdmodel.predict(question)
+        prediction2 = neuralnet.predict(question)
+        return(jsonify(unit1 = prediction1, unit2 = prediction2))
+
+@app.route("/getcase")
+def getcase():
+    if request.args.get("number"):
+        image_number = int(request.args.get("number"))
+        case_details = ocr.get_case(image_list[image_number])
+        print(case_details.email)
+        print(case_details.date)
+        print(case_details.name)
+        return jsonify(image_name = image_list[image_number],
+        name = case_details.name, email = case_details.email,
+        date = case_details.date, post = case_details.post,
+        id = case_details.id)
+    else:
+        print('Error, no image index')

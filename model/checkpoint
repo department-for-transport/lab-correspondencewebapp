@@ -1,0 +1,2 @@
+model_checkpoint_path: "/home/zach/chapter/PQNeuralNet/model/model2.tflearn"
+all_model_checkpoint_paths: "/home/zach/chapter/PQNeuralNet/model/model2.tflearn"
