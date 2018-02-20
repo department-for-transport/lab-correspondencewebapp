@@ -4,7 +4,8 @@ from google.cloud import storage
 import ocr
 import SGDpredict
 import allocator
-
+import urllib.request
+import getpq
 
 
 
@@ -19,22 +20,22 @@ def list_images(bucket_name):
         image_list.append(blob.name)
     return image_list
 
-#get list of images from bucket
-image_list = list_images('chapterimages')
-
 #Load SGDmodel
 sgdmodel = SGDpredict.SGDModel()
 sgdmodel.load('/home/zach/chapter/web/model/sk_SGD_model.pickle')
+print('SGD loaded')
 
 #load NeuralNet
-
 neuralnet = allocator.NeuralNet('model/model.tflearn', 'model/words.pickle', 'model/categories.pickle')
 neuralnet.load_model()
-
-
+print('neuralnet loaded')
 
 app = Flask(__name__)
 JSGlue(app)
+
+#get list of images from bucket
+image_list = list_images('chapterimages')
+
 
 if app.config["DEBUG"]:
     @app.after_request
@@ -62,6 +63,12 @@ def getunit():
         prediction1 = sgdmodel.predict(question)
         prediction2 = neuralnet.predict(question)
         return(jsonify(unit1 = prediction1, unit2 = prediction2))
+
+@app.route("/getpqs")
+def getpqs():
+    return(jsonify(getpq.get_pqs()))
+
+
 
 @app.route("/getcase")
 def getcase():

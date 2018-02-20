@@ -49,6 +49,7 @@ def detect_quadrant(block,page_dimensions):
 
 def create_chapter2_case(uri):
     """takes image location, gets image of correspondence from google cloud bucket and returns a chapter2_case object using the data from the image"""
+
     client = vision.ImageAnnotatorClient()
     image = types.Image()
     image.source.image_uri = uri
@@ -128,5 +129,6 @@ if __name__ == '__main__':
         print("\n")
 
 def get_case(image_title):
+
     chapter_case = create_chapter2_case('gs://chapterimages/{}'.format(image_title))
     return chapter_case

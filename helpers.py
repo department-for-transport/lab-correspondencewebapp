@@ -13,8 +13,6 @@ from sner import NERClient
 tagger = NERClient(host='localhost',port=9199)
 
 
-
-
 class Chapter2_Case:
     """Chapter2_Case objects hold the data extracted from the incoming letter, and the methods needed to update that data"""
     def __init__(self):
@@ -28,7 +26,7 @@ class Chapter2_Case:
     def set_email(self, text):
         """Extracts email using regex"""
         re_pattern = re.compile(r'[\w\.-]+@[\w\.-]+')
-        match_list = re_pattern.findall(text)  
+        match_list = re_pattern.findall(text)
         if match_list:
             self.email.append(match_list[0])
 

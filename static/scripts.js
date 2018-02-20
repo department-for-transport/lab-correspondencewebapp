@@ -33,12 +33,49 @@ function ShowSlide(n){
 
 
 function grabunit() {
-  query = $('#parliamentaryquestion').val()
+  $('.pqbox').each(function(){
+    var div = $(this)
+    $.getJSON(Flask.url_for("getunit"), {question: $(this).text()})
+    .done(function(data) {
+      console.log(div.text())
+      console.log(data.unit1)
+      console.log(data.unit2)
+      div.append("<div class='unitbox'>" +'SGD Classifier: ' + data.unit1 + "</div>")
+      div.append("<div class='unitbox'>" +'Neural Net: ' + data.unit2 + "</div>")
+
+    });
+  });
+};
+
+function checkunit() {
+  query = $('#question').val()
   $.getJSON(Flask.url_for("getunit"), {question: query})
+    .done(function(data) {
+      $('.unitbox').remove()
+      console.log(data.unit1)
+      console.log(data.unit2)
+      $('.pqbox').append("<div class='unitbox'>" +'SGD Classifier: ' + data.unit1 + "</div>")
+      $('.pqbox').append("<div class='unitbox'>" +'Neural Net: ' + data.unit2 + "</div>")
+
+    });
+};
+
+function getpqs() {
+  $('.pqholder').empty();
+  $.getJSON(Flask.url_for("getpqs"))
   .done(function(data) {
-    $('#unit1').val(data.unit1)
-    $('#unit2').val(data.unit2)
+    pqholder = $('.pqholder')
+    for (var key in data){
+      console.log('okay')
+      pqholder.append("<div class='namebox'>" +key + "</div>");
+      pqholder.append("<div class='pqbox'>" +data[key]+ "</div>");
+    }
   })
+};
+
+function customquestion() {
+  $('.pqholder').empty();
+  $('.pqholder').append("<div class='form-group pqbox'> <input type='text' class='form-control' id='question' placeholder='Enter question'> <input type='button' class='btn btn-block btn-success' onclick='checkunit()' id ='getpq' value='Get unit'>");
 };
 
 $(function(){

@@ -59,33 +59,23 @@
       <div class="row">
 
         <div class="col-md-8">
-          <form action="">
-          <div id = "enter-pq">
-           <div class="form-group">
-             <label for="sender">Question</label>
-             <input type="text" value = "" class="form-control" id="parliamentaryquestion">
-           </div>
-         </form>
-           <input type="button" class="btn btn-block btn-success" onclick="grabunit()"  id ="getunit" value="Get unit">
+          <div class = "pqholder">
+          </div>
+
+
 
 
 
         </div>
-      </div>
+
 
         <div class="col-md-4">
-          <form action="">
           <div id = "enter-pq">
-           <div class="form-group">
-             <label for="sender">SGD</label>
-             <input type="text" value = "" class="form-control" id="unit1">
-           </div>
-           <div class="form-group">
-             <label for="sender">Neural Net</label>
-             <input type="text" value = "" class="form-control" id="unit2">
-           </div>
-         </form>
-           <input type="button" class="btn btn-block btn-success"  id ="allocate" value="Allocate">
+           <input type="button" class="btn btn-block btn-success" onclick="getpqs()"  id ="getpq" value="Get Parliamentary Questions">
+           <br>
+           <input type="button" class="btn btn-block btn-success" onclick="grabunit()"  id ="getunit" value="Get units">
+           <br>
+           <input type="button" class="btn btn-block btn-success" onclick="customquestion()"  id ="customquestion" value="Custom question">
         </div>
       </div>
     </div>
