@@ -1,4 +1,6 @@
 env/
 __pycache__/
 service-account.json
-
+procfile
+wsgi.py
+etc/

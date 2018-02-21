@@ -29,16 +29,20 @@ body {
 /* Hide the images by default */
 .mySlides {
   visibility: visible;
+  width: 90%;
+  padding-top: 0px;
+  margin: auto;
 
 }
 
 #correspondence_img {
   vertical-align: top;
-  position:relative;
-  margin:auto;
+  position: relative;
+  top: 0px;
+  left:50px;
   padding-top: 0px;
-  object-position: center top;
-  width: 100%;
+  margin-left: auto;
+  width: 90%;
 }
 
 
@@ -139,14 +143,17 @@ body {
     border: 16px solid #f3f3f3; /* Light grey */
     border-top: 16px solid #3498db; /* Blue */
     border-radius: 50%;
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     animation: spin 1s linear infinite;
-    visibility: hidden;
-    position: relative;
-    top: 400px;
-    left: 260px;
-}
+    visibility: visible;
+    position: absolute;
+    left: 45%;
+    top: 50%;
+    z-index: 1;
+    width: 150px;
+    height: 150px;
+    }
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
@@ -183,8 +190,13 @@ body {
   width: 100%;
 }
 
+.correctform {
+  border-color: #5cb85c !important;
+  box-shadow: 5px 5px 8px #5cb85c !important;
+}
 .btn{
   margin: 10px;
+  margin-left: 0px;
 }
 
 .unitbox {
@@ -196,7 +208,7 @@ body {
     padding: 5px;
     padding-left:10px;
     color: white;
-    
+
     animation: slide-up 0.7s ease;
 }
 

@@ -7,13 +7,16 @@ function ShowSlide(n){
   slidenumber+=n;
   console.log(slidenumber)
   if (slidenumber<0){slidenumber=0}
-  $('.mySlides').css("visibility", "hidden")
-  $('.loader').css("visibility", "visible")
+  $('#correspondence_img').css("visibility", "hidden")
+  console.log('heloooo')
+  $('#loader').addClass("loader")
   $('#sender').val("");
   $('#date').val("");
   $('#email').val("");
   $('#post').val("");
-  $('#caseid').html("");
+  $('#casenumber').val("");
+  $('.form-control').removeClass('correctform');
+
 
   $.getJSON(Flask.url_for("getcase"), {number: slidenumber})
   .done(function(data) {
@@ -22,12 +25,24 @@ function ShowSlide(n){
     console.log($('#correspondence_img'))
     $('#correspondence_img').attr("src", "https://storage.googleapis.com/chapterimages/"+data.image_name)
     $('#sender').val(data.name);
+    if ($('#sender').val().length > 0){
+      $('#sender').addClass('correctform')
+    };
     $('#date').val(data.date);
+    if ($('#date').val().length > 0){
+      $('#date').addClass('correctform');
+    };
     $('#email').val(data.email);
+    if ($('#email').val().length > 0){
+      $('#email').addClass('correctform');
+    };
     $('#post').val(data.post);
-    $('#caseid').html("Case " + data.id);
-    $('.loader').css("visibility", "hidden");
-    $('.mySlides').css("visibility", "visible");
+    if ($('#post').val().length > 0){
+      $('#post').addClass('correctform');
+    };
+    $('#casenumber').val(data.id);
+    $('#loader').removeClass("loader");
+    $('#correspondence_img').css("visibility", "visible");
   });
 };
 

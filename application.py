@@ -84,3 +84,6 @@ def getcase():
         id = case_details.id)
     else:
         print('Error, no image index')
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')

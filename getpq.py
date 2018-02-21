@@ -5,7 +5,7 @@ import pprint
 pp = pprint.PrettyPrinter()
 
 def get_pqs():
-    req = urllib.request.Request('http://eldaddp.azurewebsites.net/commonsoralquestions/answeringdepartment.json?q=department%20for%20transport')
+    req = urllib.request.Request('http://eldaddp.azurewebsites.net/commonsoralquestions/answeringdepartment.json?q=department%20for%20transport&_page=0&_sort=-AnswerDate')
     try:
         response = urllib.request.urlopen(req)
     except URLError as e:
@@ -29,7 +29,7 @@ def get_pqs():
             pqdict[pq['tablingMemberPrinted'][0]['_value']] = pq['questionText']
         return pqdict
 
-        
+
 
 
 
