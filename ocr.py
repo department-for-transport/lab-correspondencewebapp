@@ -35,7 +35,7 @@ def list_images(bucket_name):
     return image_list
 
 
-def detect_quadrant(block,page_dimensions):
+def detect_address_quadrant(block,page_dimensions):
     """Detects if block is in upper right quadrant"""
     #keep track of dimensions within quadrant
     i = 0
@@ -46,6 +46,19 @@ def detect_quadrant(block,page_dimensions):
     #if all 4 quadrants within boundary
     if i == 4:
         return True
+
+def detect_sender_quadrant(block,page_dimensions):
+    """Detects if block is in upper right quadrant"""
+    #keep track of dimensions within quadrant
+    j = 0
+    #test dimensions
+    for dim in block.bounding_box.vertices:
+        if (dim.x<0.7*page_dimensions[0]) and (dim.y<0.5*page_dimensions[1]):
+            j+=1
+    #if all 4 polylines within boundary
+    if j == 4:
+        return True
+
 
 def create_chapter2_case(uri):
     """takes image location, gets image of correspondence from google cloud bucket and returns a chapter2_case object using the data from the image"""
@@ -75,7 +88,7 @@ def create_chapter2_case(uri):
         #extract each text block from top right quadrant and format it
         for block in page.blocks:
 
-            if detect_quadrant(block, dimensions) == True:
+            if detect_address_quadrant(block, dimensions) == True:
                 block_words = []
                 for paragraph in block.paragraphs:
                     block_words.extend(paragraph.words)
@@ -103,6 +116,27 @@ def create_chapter2_case(uri):
                 #set chapter2 case object date
                 if not chapter2_case.name:
                     chapter2_case.set_names(block_text)
+
+            elif detect_sender_quadrant(block, dimensions) == True:
+                block_words = []
+                for paragraph in block.paragraphs:
+                    block_words.extend(paragraph.words)
+
+                block_symbols = []
+                for word in block_words:
+                    block_symbols.extend(word.symbols)
+
+                block_text = ''
+                for symbol in block_symbols:
+                    block_text = block_text + symbol.text
+                    if symbol.property.detected_break.type == 1 or symbol.property.detected_break.type == 3 or symbol.property.detected_break.type == 5:
+                        block_text = block_text + ' '
+
+                if not chapter2_case.to:
+                    print(block_text)
+                    chapter2_case.set_to(block_text)
+
+
 
         return chapter2_case
 

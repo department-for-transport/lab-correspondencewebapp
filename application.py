@@ -81,7 +81,7 @@ def getcase():
         return jsonify(image_name = image_list[image_number],
         name = case_details.name, email = case_details.email,
         date = case_details.date, post = case_details.post,
-        id = case_details.id)
+        id = case_details.id, to = case_details.to)
     else:
         print('Error, no image index')
 

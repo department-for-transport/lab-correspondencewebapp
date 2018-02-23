@@ -22,6 +22,7 @@ class Chapter2_Case:
         self.date = []
         self.logo = []
         self.post = []
+        self.to =[]
 
     def set_email(self, text):
         """Extracts email using regex"""
@@ -50,6 +51,25 @@ class Chapter2_Case:
                 pass
         else:
             self.name.append(names)
+
+    def set_to(self,text):
+        """Extracts person names from block of text"""
+        to = []
+        tokens = nltk.tokenize.word_tokenize(text)
+        #tagged_words = st.tag(tokens)
+        tagged_words = tagger.tag(text)
+        for word in tagged_words:
+            
+            if word[1] == 'PERSON':
+                to.append(word[0])
+        print('to{}'.format(to))
+        ###check names against parliament api
+        api_check = name_check.check_name(to)
+        if api_check is not None:
+            self.to.append(api_check[0])
+
+        else:
+            self.to.append(to)
 
     def set_date(self, text):
         try:

@@ -5,14 +5,13 @@ import xml.etree.ElementTree as ET
 import json
 
 
-
 pp = pprint.PrettyPrinter(indent = 4)
 
 def check_name(name):
     """gets rid of Rt Hon, MP etc and passes name to check_api"""
 
     try:
-        if name[0] == 'Rt' or name[0] == 'RT':
+        if name[0] == 'Rt' or name[0] == 'RT' or name[0] == 'Rt.' or name[0] == '\nHon':
             del(name[0])
         if name[0] == 'HON' or name[0] == 'Hon':
             del(name[0])
@@ -32,7 +31,7 @@ def check_api(nametocheck):
     req = urllib.request.Request('http://data.parliament.uk/membersdataplatform/services/mnis/members/query/house=all|name*{}/GovernmentPosts'.format(nametocheck), headers = {'Accept':'application/json'})
     try:
         response = urllib.request.urlopen(req)
-    except URLError as e:
+    except urllib.error.URLError as e:
         if hasattr(e, 'reason'):
             print('We failed to reach a server.')
             print('Reason: ', e.reason)

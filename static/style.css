@@ -33,6 +33,7 @@ body {
   padding-top: 0px;
   margin: auto;
 
+
 }
 
 #correspondence_img {
@@ -43,6 +44,7 @@ body {
   padding-top: 0px;
   margin-left: auto;
   width: 90%;
+  border: 5px solid #428bca;
 }
 
 
