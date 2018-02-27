@@ -50,6 +50,11 @@ if app.config["DEBUG"]:
 def index():
     return render_template('index.html')
 
+@app.route("/draft")
+def draft():
+
+    return render_template('draft.html')
+
 
 @app.route("/parliamentaryquestions")
 def parliamentaryquestions():

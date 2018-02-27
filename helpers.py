@@ -23,6 +23,7 @@ class Chapter2_Case:
         self.logo = []
         self.post = []
         self.to =[]
+        self.type = []
 
     def set_email(self, text):
         """Extracts email using regex"""
@@ -59,7 +60,7 @@ class Chapter2_Case:
         #tagged_words = st.tag(tokens)
         tagged_words = tagger.tag(text)
         for word in tagged_words:
-            
+
             if word[1] == 'PERSON':
                 to.append(word[0])
         print('to{}'.format(to))

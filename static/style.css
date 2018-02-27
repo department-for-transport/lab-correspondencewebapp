@@ -16,6 +16,28 @@ body {
 
 * {box-sizing:border-box}
 
+.docholder{
+  width: 650px;
+  height: 1000px;
+  border: 2px solid #428bca;
+}
+
+.snippetholder{
+  width: 100%;
+  height: 1000px;
+  border: 2px solid #428bca;
+}
+
+.snippet{
+  width: 90%;
+  height: auto;
+  border: 2px solid #5cb85c;
+  margin: auto;
+  margin-top: 10px;
+  padding: 5px 5px 5px 5px;
+  
+}
+
 /* Slideshow container */
 .slideshow-container {
   width: 650px;

@@ -1,15 +1,16 @@
 
 
-
+//set slide number to the first slide
 var slidenumber = 0
 
+//Gets next slide, displays it, and updates form
 function ShowSlide(n){
   slidenumber+=n;
-  console.log(slidenumber)
+  //make sure we're not getting a negative number slide
   if (slidenumber<0){slidenumber=0}
+  //clear page and forms
   $('#correspondence_img').css("visibility", "hidden")
   $('#correspondence_img').attr("src","")
-  console.log('heloooo')
   $('#loader').addClass("loader")
   $('#sender').val("");
   $('#date').val("");
@@ -18,7 +19,6 @@ function ShowSlide(n){
   $('#casenumber').val("");
   $('#to').val("");
   $('.form-control').removeClass('correctform');
-
 
   $.getJSON(Flask.url_for("getcase"), {number: slidenumber})
   .done(function(data) {
@@ -49,7 +49,7 @@ function ShowSlide(n){
   });
 };
 
-
+//pass server all PQ text and get 2 predictions in response
 function grabunit() {
   $('.pqbox').each(function(){
     var div = $(this)
@@ -65,6 +65,7 @@ function grabunit() {
   });
 };
 
+//Pass server custom question and get prediction in response
 function checkunit() {
   query = $('#question').val()
   $.getJSON(Flask.url_for("getunit"), {question: query})
@@ -78,6 +79,7 @@ function checkunit() {
     });
 };
 
+//Get today's PQ data from server
 function getpqs() {
   $('.pqholder').empty();
   $.getJSON(Flask.url_for("getpqs"))
@@ -91,11 +93,24 @@ function getpqs() {
   })
 };
 
+//set up page to get a custom question
 function customquestion() {
   $('.pqholder').empty();
   $('.pqholder').append("<div class='form-group pqbox'> <input type='text' class='form-control' id='question' placeholder='Enter question'> <input type='button' class='btn btn-block btn-success' onclick='checkunit()' id ='getpq' value='Get unit'>");
 };
 
-$(function(){
-  ShowSlide(1);
-});
+function allowDrop(ev) {
+    ev.preventDefault();
+};
+
+function drag(ev) {
+  console.log(ev.target.id)
+    ev.dataTransfer.setData("text", ev.target.id);
+};
+
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    console.log(data)
+    ev.target.appendChild(document.getElementById(data));
+};

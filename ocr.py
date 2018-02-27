@@ -79,6 +79,7 @@ def create_chapter2_case(uri):
     logos = response.logo_annotations
     for logo in logos:
         chapter2_case.set_logo(logo.description)
+        print(logo.description)
         break
 
     for page in document.pages:
