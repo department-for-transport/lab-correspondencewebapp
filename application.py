@@ -6,19 +6,26 @@ import SGDpredict
 import allocator
 import urllib.request
 import getpq
+from oauth2client import service_account
 
 
 
 def list_images(bucket_name):
     """Lists all the images in the bucket."""
-    storage_client = storage.Client()
-    bucket = storage_client.get_bucket(bucket_name)
+    try:
+        storage_client = storage.Client()
+        bucket = storage_client.get_bucket(bucket_name)
 
-    blobs = bucket.list_blobs()
-    image_list = []
-    for blob in blobs:
-        image_list.append(blob.name)
-    return image_list
+        blobs = bucket.list_blobs()
+        image_list = []
+        for blob in blobs:
+            image_list.append(blob.name)
+        return image_list
+    except:
+        pass
+
+
+
 
 #Load SGDmodel
 sgdmodel = SGDpredict.SGDModel()
