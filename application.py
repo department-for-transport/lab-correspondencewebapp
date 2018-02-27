@@ -22,7 +22,7 @@ def list_images(bucket_name):
 
 #Load SGDmodel
 sgdmodel = SGDpredict.SGDModel()
-sgdmodel.load('/home/zach/chapter/web/model/sk_SGD_model.pickle')
+sgdmodel.load('model/sk_SGD_model.pickle')
 print('SGD loaded')
 
 #load NeuralNet
