@@ -8,22 +8,23 @@ The directory includes all application.py, the main web application, and a numbe
 
 Within 'model' is all the required trained models, and a number of other required objects
 
-Within stanford-ner is the stanford named entity recogniser, which needs to be run as a java servlet. cd in the stanford-ner directory and run:
+Within stanford-ner is the stanford named entity recogniser, which needs to be run as a java servlet in my implementation. In the stanford-ner directory and run:
 
 "java -Djava.ext.dirs=./lib -cp stanford-ner.jar edu.stanford.nlp.ie.NERServer -port 9199 -loadClassifier english.all.3class.distsim.crf.ser.gz"
 
-This will load an instance of the named entity tagger, which the application makes calls to
+This will load an instance of the named entity tagger, which the application makes calls to. You need java isntalled.
 
-(needs java)
+Alternatively you can load the tagger in your code, but it's slower!
 
+###  Optical Character Recognition
 
-###  Usage
+We use google cloud storage to host our correspondence images, and the google vision API to read them, so you'll need to set up your own google cloud project to use these services.
 
-You'll need to set the following variables in your enviro
+To access those services you the easiest way is to store the Service Account Credentials that google provide as a .json in the workding directory, and put that location on your path, e.g.
 
-export GOOGLE_APPLICATION_CREDENTIALS='PATHTOSERVICEACCOUNTCREDENTIALS(the api key).JSON'
+export GOOGLE_APPLICATION_CREDENTIALS='PATH/TO/SERVICEACCOUNT/CREDENTIALS.JSON'
 
-This allows you to access my google cloud storage bucket, you could equally set up your own
+### To run the app:
 
 export FLASK_APP=application.py
 
