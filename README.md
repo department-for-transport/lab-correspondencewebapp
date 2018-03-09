@@ -19,11 +19,14 @@ This will load an instance of the named entity tagger, which the application mak
 
 ###  Usage
 
-You'll need to set the following variables in your enviro
+We use google cloud storage to host our correspondence images, and the google vision API to read them, so you'll need to set up your own google cloud project to use these services.
 
-export GOOGLE_APPLICATION_CREDENTIALS='PATHTOSERVICEACCOUNTCREDENTIALS(the api key).JSON'
+To access those services you the easiest way is to store the Service Account Credentials that google provide as a .json in the workding directory, and put that location on your path, e.g.
 
-This allows you to access my google cloud storage bucket, you could equally set up your own
+export GOOGLE_APPLICATION_CREDENTIALS='PATH/TO/SERVICEACCOUNT/CREDENTIALS.JSON'
+
+
+To run the app:
 
 export FLASK_APP=application.py
 
