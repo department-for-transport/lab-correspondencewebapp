@@ -5,7 +5,9 @@ import pprint
 pp = pprint.PrettyPrinter()
 
 def get_pqs():
-    req = urllib.request.Request('http://eldaddp.azurewebsites.net/commonsoralquestions/answeringdepartment.json?q=department%20for%20transport&_page=0&_sort=-AnswerDate')
+    # PQ API example - http://eldaddp.azurewebsites.net/commonsoralquestions/answeringdepartment.json?q=department%20for%20transport&_page=0&_sort=-dateTabled
+
+    req = urllib.request.Request('http://eldaddp.azurewebsites.net/commonsoralquestions/answeringdepartment.json?q=department%20for%20transport&_page=0&_sort=-dateTabled')
     try:
         response = urllib.request.urlopen(req)
     except URLError as e:
