@@ -145,7 +145,8 @@ def create_chapter2_case(uri):
 if __name__ == '__main__':
 
     #connect to NER server - https://github.com/caihaoyu/sner/
-    #java -Djava.ext.dirs=./lib -cp stanford-ner.jar edu.stanford.nlp.ie.NERServer -port 9199 -loadClassifier english.all.3class.distsim.crf.ser.gz
+    # Enter this command in the stanford-ner directory:
+    # java -Djava.ext.dirs=./lib -cp stanford-ner.jar edu.stanford.nlp.ie.NERServer -port 9199 -loadClassifier english.all.3class.distsim.crf.ser.gz
 
 
     #get list of images in google storage bucket

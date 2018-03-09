@@ -35,5 +35,4 @@ def get_pqs():
 
 
 
-        #pqdict = dict(enumerate(pqs))
-        #print(pqdict)
+        
