@@ -21,7 +21,7 @@ html5lib==0.9999999
 httplib2==0.10.3
 idna==2.6
 itsdangerous==0.24
-Jinja2==2.10
+Jinja2>=2.10.1
 Markdown==2.6.11
 MarkupSafe==1.0
 matplotlib==2.1.2
@@ -45,7 +45,7 @@ six==1.11.0
 sklearn==0.0
 sner==0.2.2
 tensorboard==1.6.0
-tensorflow==1.5.0
+tensorflow>=1.12.1 
 tensorflow-tensorboard==1.5.1
 termcolor==1.1.0
 textblob==0.15.1
