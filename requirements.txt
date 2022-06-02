@@ -17,7 +17,7 @@ googleapis-common-protos==1.5.3
 grpcio==1.8.4
 gunicorn==19.7.1
 h5py==2.7.1
-html5lib==0.9999999
+html5lib==0.99999999
 httplib2==0.10.3
 idna==2.6
 itsdangerous==0.24
