@@ -14,7 +14,7 @@ google-cloud-storage==1.7.0
 google-cloud-vision==0.29.0
 google-resumable-media==0.3.1
 googleapis-common-protos==1.5.3
-grpcio==1.8.4
+grpcio==1.53.0
 gunicorn==19.7.1
 h5py==2.7.1
 html5lib==0.9999999
